@@ -1,0 +1,11 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    { "name": "Task1: MCP server (stdio)", "type": "debugpy", "request": "launch", "program": "${workspaceFolder}/task1_mcp_server/server.py", "console": "integratedTerminal" },
+    { "name": "Task2: Gateway :8080", "type": "debugpy", "request": "launch", "module": "uvicorn", "cwd": "${workspaceFolder}/task2_mcp_gateway", "args": ["gateway:build_default_app", "--factory", "--port", "8080"], "env": {"DOWNSTREAM_URL": "http://127.0.0.1:9001"} },
+    { "name": "Task2: Mock downstream :9001", "type": "debugpy", "request": "launch", "module": "uvicorn", "cwd": "${workspaceFolder}/task2_mcp_gateway", "args": ["mock_downstream:app", "--port", "9001"] },
+    { "name": "Task3: PII gateway :8081", "type": "debugpy", "request": "launch", "module": "uvicorn", "cwd": "${workspaceFolder}/task3_pii_stream", "args": ["gateway:build_default_app", "--factory", "--port", "8081"], "env": {"UPSTREAM_URL": "http://127.0.0.1:9002"} },
+    { "name": "Task3: Mock LLM :9002", "type": "debugpy", "request": "launch", "module": "uvicorn", "cwd": "${workspaceFolder}/task3_pii_stream", "args": ["mock_llm:app", "--port", "9002"] },
+    { "name": "Task4: Router :8082", "type": "debugpy", "request": "launch", "module": "uvicorn", "cwd": "${workspaceFolder}/task4_router", "args": ["router:build_default_app", "--factory", "--port", "8082"] }
+  ]
+}
